@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="500px" src="https://raw.githubusercontent.com/Art404/boiler404/master/twitter-boiler404.png" />
+  <img width="500px" src="https://raw.githubusercontent.com/Art404/twitter-boiler404/master/twitter-boiler404.png" />
 </p>
 
 # twitter-boiler404
