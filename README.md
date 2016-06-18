@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Art404/boiler404/master/boiler404.png" />
+  <img width="500px" src="https://raw.githubusercontent.com/Art404/boiler404/master/twitter-boiler404.png" />
 </p>
 
 # twitter-boiler404
@@ -12,9 +12,17 @@ Isomorphic, React, ES6, Webpack based starter kit for quickly starting twitter b
 
 ### Environment Variables
 
-Variable | Description
-:------- | :----------
-firebase\_url | Optional Firebase server to listen to, will get added to the `app` prop at the top level container.
+Create an `env.json` in the root of the folder with the following keys:
+
+```js
+{
+  "CONSUMER_KEY": "XXX",
+  "CONSUMER_SECRET": "XXX",
+  "ACCESS_TOKEN_KEY": "XXX",
+  "ACCESS_TOKEN_SECRET": "XXX",
+  "COOKIE_NAME": "my-app-name"
+}
+```
 
 
 ```bash
@@ -25,12 +33,6 @@ Start development server:
 
 ```bash
 $ npm run start:dev
-```
-
-Start with firebase:
-
-```bash
-$ npm run firebase_url="XXX" start:dev
 ```
 
 Start production server:
