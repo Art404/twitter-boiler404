@@ -3,7 +3,7 @@ import React, {Component, PropTypes, cloneElement} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import cn from 'classnames'
-import {isEqual, merge} from 'lodash'
+import {isEqual, omit, cloneDeep} from 'lodash'
 import Navigation from '../../components/Navigation/Navigation'
 
 export class App extends Component {
@@ -26,14 +26,20 @@ export class App extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.client.cookie) {
+      this.props.actions.fetchUser(this.props.client.cookie)
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (!isEqual(prevProps.params, this.props.params)) window.scrollTo(0, 0)
   }
 
   render() {
-    const {app, children, layout, actions, client} = this.props
+    const {children, layout, actions, client} = this.props
     const navProps = {actions, client, layout}
-    const childProps = merge(app, client)
+    const childProps = omit(cloneDeep(this.props), ['children'])
     const appClasses = cn('App', `--${client.agent}`)
 
     return (

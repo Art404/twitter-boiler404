@@ -2,9 +2,9 @@
   <img src="https://raw.githubusercontent.com/Art404/boiler404/master/boiler404.png" />
 </p>
 
-# boiler404
+# twitter-boiler404
 
-Isomorphic, React, ES6, Webpack based starter kit for quickly starting web app projects tailored for [art404](http://art404.com).
+Isomorphic, React, ES6, Webpack based starter kit for quickly starting twitter based web app projects tailored for [art404](http://art404.com).
 
 > Based off a fork of Richard Krawll's [react-starter](https://github.com/richardkall/react-starter)
 
@@ -47,6 +47,9 @@ $ git push heroku master
 
 # Features
 
+- Twitter login/logout oAuth flow handled with serialized cookie
+- Twitter api calls available
+- [react-tweet](https://github.com/mannynotfound/react-tweet) for quickly rendering tweets
 - Isomorphic server rendering for faster load times + seo benefits
 - Pre-render data-fetching
 - Mobile + Cookie detection as top-level props 

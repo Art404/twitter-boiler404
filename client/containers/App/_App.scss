@@ -21,6 +21,31 @@
   }
 }
 
+.container {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
 .Blocker {
   z-index: -1;
   position: fixed;
@@ -51,3 +76,21 @@
   top: 0;
 }
 
+@media screen and (max-width: 1300px) {
+  .container {
+    width: 980px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    width: 640px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .container {
+    padding: 0 2%;
+    width: 100%;
+  }
+}
