@@ -18,8 +18,6 @@ Create an `env.json` in the root of the folder with the following keys:
 {
   "CONSUMER_KEY": "XXX",
   "CONSUMER_SECRET": "XXX",
-  "ACCESS_TOKEN_KEY": "XXX",
-  "ACCESS_TOKEN_SECRET": "XXX",
   "COOKIE_NAME": "my-app-name"
 }
 ```
