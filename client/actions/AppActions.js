@@ -1,20 +1,13 @@
 import * as types from '../constants/ActionTypes'
 import fetch from 'isomorphic-fetch'
 
+const API = process.env.API || 'http://localhost:3000/api'
+
 export function setClient(client) {
   return (dispatch) => (
      dispatch({
       type: types.SET_CLIENT,
       client,
-    })
-  )
-}
-
-export function toggleSidebar(sideOpen) {
-  return (dispatch) => (
-    dispatch({
-      type: types.TOGGLE_SIDEBAR,
-      sideOpen,
     })
   )
 }
@@ -26,13 +19,26 @@ export function fetchUserSuccess(user) {
   }
 }
 
-export function fetchUser(cookie) {
-  const API = process.env.API || 'http://localhost:3000/api'
+export function fetchUserFailure() {
+  return {
+    type: types.FETCH_USER_FAILURE,
+  }
+}
+
+export function fetchUserData(cookie) {
+  if (!cookie) {
+    return (dispatch) => (
+      dispatch(fetchUserFailure())
+    )
+  }
 
   return (dispatch) => (
-    fetch(`${API}/getUser/${cookie}`)
-      .then((response) => response.json())
+    fetch(`${API}/fetchUser/${cookie}`)
+      .then((resp) => resp.json())
       .then((json) => dispatch(fetchUserSuccess(json)))
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error)
+        dispatch(fetchUserFailure())
+      })
   )
 }

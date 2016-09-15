@@ -7,7 +7,10 @@ export default function app(state = {}, action) {
     case types.FETCH_USER_SUCCESS:
       newState.user = action.user
       return newState
-    default:
+    case types.FETCH_USER_FAILURE:
+      newState.user = null
       return newState
+    default:
+      return state
   }
 }

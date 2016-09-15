@@ -3,14 +3,13 @@ import React, {Component, PropTypes, cloneElement} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import cn from 'classnames'
-import {isEqual, omit, cloneDeep} from 'lodash'
+import {isEqual, omit, cloneDeep, get} from 'lodash'
 import Navigation from '../../components/Navigation/Navigation'
 
 export class App extends Component {
   static propTypes = {
     'params': PropTypes.object.isRequired,
     'actions': PropTypes.object.isRequired,
-    'layout': PropTypes.object.isRequired,
     'app': PropTypes.object.isRequired,
     'client': PropTypes.object.isRequired,
     'children': PropTypes.object.isRequired,
@@ -27,9 +26,8 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    if (this.props.client.cookie) {
-      this.props.actions.fetchUser(this.props.client.cookie)
-    }
+    const cookie = get(this.props, 'client.cookie', null)
+    this.props.actions.fetchUserData(cookie)
   }
 
   componentDidUpdate(prevProps) {
@@ -37,8 +35,8 @@ export class App extends Component {
   }
 
   render() {
-    const {children, layout, actions, client} = this.props
-    const navProps = {actions, client, layout}
+    const {children, actions, client} = this.props
+    const navProps = {actions, client}
     const childProps = omit(cloneDeep(this.props), ['children'])
     const appClasses = cn('App', `--${client.agent}`)
 
@@ -57,7 +55,6 @@ function mapStateToProps(state) {
   return {
     'app': state.app,
     'client': state.client,
-    'layout': state.layout,
   }
 }
 

@@ -27,8 +27,7 @@ router.get('/logout-twitter', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/getUser/:cookie', (req, res) => {
-  // isomorphic fetch doesnt handle cookies well
+router.get('/fetchUser/:cookie', (req, res) => {
   const {cookie} = req.params
   if (cookie) req.cookies[process.env.COOKIE_NAME] = cookie
 

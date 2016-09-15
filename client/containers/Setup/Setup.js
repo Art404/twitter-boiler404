@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import Tweet from 'react-tweet'
 import LogoutBtn from '../../components/LogoutBtn/LogoutBtn'
 import Profile from '../../components/Profile/Profile'
+import Loading from 'react-loading'
 import {cloneDeep} from 'lodash'
 
 class Setup extends React.Component {
@@ -12,10 +13,30 @@ class Setup extends React.Component {
   }
 
   render() {
-    const {user} = this.props.app
-    if (!user) return <a href="/">{'please login'}</a>
+    const {app} = this.props
+    const notRequested = app && app.user === undefined
+    if (notRequested) {
+      return (
+        <div className="container">
+          <div className="full-width center">
+            <div className="Loader">
+              <Loading
+                delay={-1}
+                type="spinningBubbles"
+                color="#0aaaf5" />
+            </div>
+          </div>
+        </div>
+      )
+    }
 
-    const userClone = cloneDeep(user)
+    if (app.user === null) {
+      return (
+        <a href="/">{'please login'}</a>
+      )
+    }
+
+    const userClone = cloneDeep(app.user)
     const tweetData = userClone.status.retweeted_status ? null : {
       ...userClone.status,
       user: userClone
@@ -25,8 +46,8 @@ class Setup extends React.Component {
       <div id="Setup" className="full-width">
         <div className="container">
           <div id="Setup-profile">
-            <h2>Logged in as @{user.screen_name}</h2>
-            <Profile user={user} />
+            <h2>Logged in as @{app.user.screen_name}</h2>
+            <Profile user={app.user} />
           </div>
           <div id="Setup-tweet">
             <h2>Last tweet:</h2>
