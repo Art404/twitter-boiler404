@@ -14,6 +14,7 @@ class Home extends React.Component {
     const {app} = this.props
     const notRequested = app && app.user === undefined
 
+    // default handler
     let HomeCpt = (
       <div className="Loader">
         <Loading
@@ -34,6 +35,15 @@ class Home extends React.Component {
           to="/setup">
           {'Continue '}&rarr;
         </Link>
+      )
+    }
+
+    // error handler
+    if (app.errorCode) {
+      return (
+        <code style={{width: '100%', textAlign: 'center', marginTop: '200px'}}>
+          GOT ERROR CODE {app.errorCode}
+        </code>
       )
     }
 

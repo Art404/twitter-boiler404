@@ -9,6 +9,7 @@ export default function app(state = {}, action) {
       return newState
     case types.FETCH_USER_FAILURE:
       newState.user = null
+      newState.errorCode = action.errorCode
       return newState
     default:
       return state

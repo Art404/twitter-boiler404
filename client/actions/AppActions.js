@@ -19,9 +19,10 @@ export function fetchUserSuccess(user) {
   }
 }
 
-export function fetchUserFailure() {
+export function fetchUserFailure(errorCode) {
   return {
     type: types.FETCH_USER_FAILURE,
+    errorCode,
   }
 }
 
@@ -34,8 +35,14 @@ export function fetchUserData(cookie) {
 
   return (dispatch) => (
     fetch(`${API}/fetchUser/${cookie}`)
-      .then((resp) => resp.json())
-      .then((json) => dispatch(fetchUserSuccess(json)))
+      .then((resp) => {
+        console.log('GOT RESP => ', resp)
+        if (resp.status !== 200) {
+           return dispatch(fetchUserFailure(resp.status))
+        }
+
+        return dispatch(fetchUserSuccess(resp.json()))
+      })
       .catch((error) => {
         console.log(error)
         dispatch(fetchUserFailure())

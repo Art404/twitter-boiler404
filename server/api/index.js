@@ -5,10 +5,12 @@ const router = new express.Router()
 const oAuth = login()
 
 function handleError(err, res) {
-  if (JSON.stringify(err).indexOf('no token')) {
+  if (JSON.stringify(err).indexOf('no token') > -1) {
     res.redirect('/api/login-twitter')
+  } else if (err.statusCode === 429) {
+    res.status(429).send('RATE LIMIT EXCEEEDED')
   } else {
-    res.send(err, 500)
+    res.status(500).send('INTERNAL SERVER ERROR')
   }
 }
 
