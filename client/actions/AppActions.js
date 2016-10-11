@@ -36,12 +36,11 @@ export function fetchUserData(cookie) {
   return (dispatch) => (
     fetch(`${API}/fetchUser/${cookie}`)
       .then((resp) => {
-        console.log('GOT RESP => ', resp)
         if (resp.status !== 200) {
            return dispatch(fetchUserFailure(resp.status))
         }
 
-        return dispatch(fetchUserSuccess(resp.json()))
+        return resp.json().then((j) => dispatch(fetchUserSuccess(j)))
       })
       .catch((error) => {
         console.log(error)
