@@ -63,7 +63,10 @@ export default {
       path: 'build'
     }),
     new ExtractTextPlugin(`[name]${DEBUG ? '' : '.[hash]'}.css`),
-    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(DEBUG ? 'development' : 'production')}),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(DEBUG ? 'development' : 'production'),
+      'process.env.API': JSON.stringify(DEBUG ? 'http://localhost:3000/api' : process.env.API)
+    }),
     ...DEBUG ? [
       new webpack.HotModuleReplacementPlugin()
     ] : [

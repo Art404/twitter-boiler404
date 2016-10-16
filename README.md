@@ -22,6 +22,16 @@ Create an `env.json` in the root of the folder with the following keys:
 }
 ```
 
+in production you'll need the following environment variables:
+
+Variable | Description
+:------- | :----------
+API | host name + api route eg: http://mysite.com/api
+CALLBACK\_URL | route for oauth to call back to , eg http://mysite.com
+CONSUMER\_KEY | twitter app consumer key
+CONSUMER\_SECRET | twitter app consumer secret
+COOKIE\_NAME | name of app cookie, eg; 'MY-APP'
+
 
 ```bash
 $ npm install
